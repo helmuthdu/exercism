@@ -20,9 +20,7 @@ export default class Forth {
       .reduce((acc, val, index) => {
         if (!isNaN(val)) {
           acc.push(val);
-        } else if ((val === 'drop' || val === 'dup') && acc.length > 0) {
-          acc = this.operators[val](acc);
-        } else if ((val === 'over' || val === 'swap') && acc.length > 1) {
+        } else if (((val === 'drop' || val === 'dup') && acc.length > 0) || ((val === 'over' || val === 'swap') && acc.length > 1)) {
           acc = this.operators[val](acc);
         } else if (/^:.*;$/.test(values)) {
           const [_, k, v] = values.match(new RegExp(`:\\s(\\S.*?)\\s(\\S.*)\\s;`));
